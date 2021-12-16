@@ -5,10 +5,7 @@ import com.chalasani.springboot.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -49,5 +46,15 @@ public class EmployeeController {
 
     // use a redirect to prevent duplicate submissions
     return "redirect:/employees/list";
+  }
+
+  @GetMapping("/updateForm")
+  public String showFormForUpdate(@RequestParam("employeeId") int id, Model model) {
+
+    Employee employee = employeeService.findEmployeeById(id);
+
+    model.addAttribute("employee", employee);
+
+    return "employee-form";
   }
 }
