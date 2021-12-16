@@ -8,8 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -59,7 +61,12 @@ public class EmployeeController {
    * @return String - Redirection Path
    */
   @PostMapping("/save")
-  public String saveEmployee(@ModelAttribute(EmployeeConstants.EMPLOYEE) Employee employee) {
+  public String saveEmployee(
+      @ModelAttribute(EmployeeConstants.EMPLOYEE) @Valid Employee employee, BindingResult result) {
+    if (result.hasErrors()) {
+      logger.error("Employee is not valid: {}", employee);
+      return EmployeeConstants.EMPLOYEE_FORM;
+    }
     logger.info(
         "Calling EmployeeService to save Employee with email: {}, firstName: {}, lastName: {}",
         employee.getEmail(),

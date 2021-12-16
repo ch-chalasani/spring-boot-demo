@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,8 @@ class EmployeeControllerTest {
   void saveEmployeeTest() {
     Employee employee = getEmployee();
     doNothing().when(employeeService).saveEmployee(isA(Employee.class));
-    employeeController.saveEmployee(employee);
+    BindingResult result = mock(BindingResult.class);
+    employeeController.saveEmployee(employee, result);
   }
 
   @Test
