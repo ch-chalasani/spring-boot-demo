@@ -1,5 +1,6 @@
 package com.chalasani.springboot.controller;
 
+import com.chalasani.springboot.constant.EmployeeConstants;
 import com.chalasani.springboot.entity.Employee;
 import com.chalasani.springboot.service.EmployeeService;
 import org.junit.jupiter.api.Test;
@@ -40,7 +41,7 @@ class EmployeeControllerTest {
   void showEmployeeFormTest() {
     Model model = new ConcurrentModel();
     employeeController.showEmployeeForm(model);
-    Employee employee = (Employee) model.getAttribute("employee");
+    Employee employee = (Employee) model.getAttribute(EmployeeConstants.EMPLOYEE);
     assertEquals(0, employee.getId());
     assertNull(employee.getFirstName());
   }
@@ -59,7 +60,7 @@ class EmployeeControllerTest {
     Model model = new ConcurrentModel();
     employeeController.showFormForUpdate(1, model);
 
-    Employee employeeFromDB = (Employee) model.getAttribute("employee");
+    Employee employeeFromDB = (Employee) model.getAttribute(EmployeeConstants.EMPLOYEE);
     assertEquals(1, employeeFromDB.getId());
     assertEquals("Lakshmi", employeeFromDB.getFirstName());
     assertEquals("lakshmi.chalasani@gmail.com", employeeFromDB.getEmail());
