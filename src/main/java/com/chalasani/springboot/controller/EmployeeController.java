@@ -30,19 +30,19 @@ public class EmployeeController {
   }
 
   @GetMapping("/employeeForm")
-  public String showEmployeeForm(Model theModel) {
+  public String showEmployeeForm(Model model) {
 
     Employee employee = new Employee();
 
-    theModel.addAttribute("employee", employee);
+    model.addAttribute("employee", employee);
 
     return "employee-form";
   }
 
   @PostMapping("/save")
-  public String saveEmployee(@ModelAttribute("employee") Employee theEmployee) {
+  public String saveEmployee(@ModelAttribute("employee") Employee employee) {
 
-    employeeService.saveEmployee(theEmployee);
+    employeeService.saveEmployee(employee);
 
     // use a redirect to prevent duplicate submissions
     return "redirect:/employees/list";
@@ -59,7 +59,7 @@ public class EmployeeController {
   }
 
   @GetMapping("/delete")
-  public String delete(@RequestParam("employeeId") int id) {
+  public String deleteEmployee(@RequestParam("employeeId") int id) {
     employeeService.deleteEmployeeById(id);
 
     return "redirect:/employees/list";
