@@ -5,5 +5,7 @@ import com.chalasani.springboot.entity.Employee;
 import java.util.List;
 
 public interface EmployeeService {
-  public List<Employee> getEmployees();
+  List<Employee> getEmployees();
+
+  void saveEmployee(Employee employee);
 }

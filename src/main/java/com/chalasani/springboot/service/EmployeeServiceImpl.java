@@ -21,4 +21,9 @@ public class EmployeeServiceImpl implements EmployeeService {
   public List<Employee> getEmployees() {
     return employeeRepository.findAllByOrderByLastNameAsc();
   }
+
+  @Override
+  public void saveEmployee(Employee employee) {
+    employeeRepository.save(employee);
+  }
 }
