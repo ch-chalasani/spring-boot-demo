@@ -1,6 +1,7 @@
 package com.chalasani.springboot.service;
 
 import com.chalasani.springboot.entity.Employee;
+import com.chalasani.springboot.exception.EmployeeNotFoundException;
 import com.chalasani.springboot.repository.EmployeeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,7 +63,7 @@ public class EmployeeServiceImpl implements EmployeeService {
       employee = result.get();
     } else {
       logger.error("Unable to find Employee with Id: " + id);
-      throw new RuntimeException("Invalid Employee Id - " + id);
+      throw new EmployeeNotFoundException("Invalid Employee Id: " + id);
     }
 
     return employee;
