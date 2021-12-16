@@ -25,6 +25,12 @@ public class EmployeeController {
     this.employeeService = employeeService;
   }
 
+  /*
+   * This method will retrieve all the Employees from database and invoke list-employees.html
+   *
+   * @param model - The Model object
+   * @return String - Thymeleaf Template Name
+   */
   @GetMapping("/list")
   public String showEmployees(Model model) {
     List<Employee> employeeList = employeeService.getEmployees();
@@ -33,6 +39,12 @@ public class EmployeeController {
     return "list-employees";
   }
 
+  /*
+   * This method will show Employee Form
+   *
+   * @param model - The Model object
+   * @return String - Thymeleaf Template Name
+   */
   @GetMapping("/employeeForm")
   public String showEmployeeForm(Model model) {
     Employee employee = new Employee();
@@ -40,6 +52,12 @@ public class EmployeeController {
     return EmployeeConstants.EMPLOYEE_FORM;
   }
 
+  /*
+   * This method will create a new Employee in the Database
+   *
+   * @param employee - The Employee object
+   * @return String - Redirection Path
+   */
   @PostMapping("/save")
   public String saveEmployee(@ModelAttribute(EmployeeConstants.EMPLOYEE) Employee employee) {
     logger.info(
@@ -53,6 +71,13 @@ public class EmployeeController {
     return EmployeeConstants.REDIRECT_EMPLOYEE_LIST;
   }
 
+  /*
+   * This method will show Employee form by filling his details
+   *
+   * @param id - The Employee id
+   * @param model - The Model object
+   * @return String - Thymeleaf Template Name
+   */
   @GetMapping("/updateForm")
   public String showFormForUpdate(
       @RequestParam(EmployeeConstants.EMPLOYEE_ID) int id, Model model) {
@@ -62,6 +87,12 @@ public class EmployeeController {
     return EmployeeConstants.EMPLOYEE_FORM;
   }
 
+  /*
+   * This method will delete the Employee using id
+   *
+   * @param id - The Employee id
+   * @return String - Redirection Path
+   */
   @GetMapping("/delete")
   public String deleteEmployee(@RequestParam(EmployeeConstants.EMPLOYEE_ID) int id) {
     logger.info("Calling EmployeeService to delete Employee with id: {}", id);

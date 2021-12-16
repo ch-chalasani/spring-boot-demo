@@ -22,12 +22,22 @@ public class EmployeeServiceImpl implements EmployeeService {
     this.employeeRepository = employeeRepository;
   }
 
+  /*
+   * This method will retrieve all the Employees from database
+   *
+   * @return List - List of Employees
+   */
   @Override
   public List<Employee> getEmployees() {
     logger.info("Calling EmployeeRepository to retrieve list of employees");
     return employeeRepository.findAllByOrderByLastNameAsc();
   }
 
+  /*
+   * This method will create a new Employee in the Database
+   *
+   * @param employee - Employee object
+   */
   @Override
   public void saveEmployee(Employee employee) {
     logger.info(
@@ -35,6 +45,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     employeeRepository.save(employee);
   }
 
+  /*
+   * This method will retrieve the Employee object using Employee id
+   *
+   * @param id - Employee id
+   * @return Employee - Employee object
+   */
   @Override
   public Employee findEmployeeById(int id) {
     Optional<Employee> result = employeeRepository.findById(id);
@@ -52,6 +68,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     return employee;
   }
 
+  /*
+   * This method will delete the Employee object using Employee id
+   *
+   * @param id - Employee id
+   */
   @Override
   public void deleteEmployeeById(int id) {
     logger.info("Deleting Employee with id: " + id);
